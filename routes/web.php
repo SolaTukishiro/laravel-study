@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\UtilityController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\RequestSampleController;
@@ -33,8 +35,13 @@ Route::get('/form', [RequestSampleController::class, 'form']);
 
 Route::get('query-strings', [RequestSampleController::class, 'queryStrings']);
 
-Route::get('/user/{id}', [RequestSampleController::class, 'profile'])->name(name:'profile');
+Route::get('/user/{id}', [RequestSampleController::class, 'profile'])->name('profile');
 
 Route::get('/products/{category}/{year}', [RequestSampleController::class, 'productsArchive']);
 
 Route::get('/route-link', [RequestSampleController::class, 'routeLink']);
+
+Route::get('/login',[RequestSampleController::class, 'loginForm']);
+Route::post('/login', [RequestSampleController::class, 'login'])->name('login');
+
+Route::resource('/events', EventController::class)->only(['index', 'create', 'store']);
