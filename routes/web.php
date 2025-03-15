@@ -4,6 +4,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\UtilityController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\HiLowController;
+use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\RequestSampleController;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
@@ -50,3 +51,6 @@ Route::resource('/events', EventController::class)->only(['index', 'create', 'st
 // ハイローゲーム
 Route::get('/hi-low', [HiLowController::class, 'index'])->name('hi-low');
 Route::post('/hi-low', [HiLowController::class, 'result']);
+
+Route::resource('/photos', PhotoController::class)->only(['create', 'store', 'show', 'destroy']);
+Route::get('/photos/{photo}/download', [PhotoController::class, 'download'])->name('photos.download');
